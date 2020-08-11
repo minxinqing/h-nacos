@@ -21,6 +21,7 @@ use Hyperf\Nacos\Config\Client;
 use Hyperf\Nacos\Exception\RuntimeException;
 use Hyperf\Nacos\Service\Instance;
 use Hyperf\Nacos\Service\Service;
+use Hyperf\Server\Event\MainCoroutineServerStart;
 use Psr\Container\ContainerInterface;
 
 class MainWorkerStartListener implements ListenerInterface
@@ -51,6 +52,7 @@ class MainWorkerStartListener implements ListenerInterface
     {
         return [
             MainWorkerStart::class,
+            MainCoroutineServerStart::class,
         ];
     }
 

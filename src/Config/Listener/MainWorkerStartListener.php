@@ -15,13 +15,11 @@ use Hyperf\Contract\ConfigInterface;
 use Hyperf\Contract\StdoutLoggerInterface;
 use Hyperf\Event\Contract\ListenerInterface;
 use Hyperf\Framework\Event\MainWorkerStart;
-use Hyperf\Nacos\Api\NacosInstance as NacosInstanceApi;
-use Hyperf\Nacos\Api\NacosService as NacosServiceApi;
 use Hyperf\Nacos\Config\Client;
-use Hyperf\Nacos\Exception\RuntimeException;
-use Hyperf\Nacos\Service\Instance;
-use Hyperf\Nacos\Service\Service;
 use Psr\Container\ContainerInterface;
+use Hyperf\Command\Event\BeforeHandle;
+use Hyperf\Framework\Event\BeforeWorkerStart;
+use Hyperf\Process\Event\BeforeProcessHandle;
 
 class MainWorkerStartListener implements ListenerInterface
 {
@@ -50,7 +48,9 @@ class MainWorkerStartListener implements ListenerInterface
     public function listen(): array
     {
         return [
-            MainWorkerStart::class,
+            BeforeWorkerStart::class,
+            BeforeProcessHandle::class,
+            BeforeHandle::class,
         ];
     }
 
